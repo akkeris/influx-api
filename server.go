@@ -13,7 +13,7 @@ import (
 	"github.com/martini-contrib/binding"
 	"github.com/martini-contrib/render"
 	"github.com/nu7hatch/gouuid"
-	structs "influxdb-api/structs"
+	structs "influx-api/structs"
 	"io"
 	"io/ioutil"
 	"net/http"
