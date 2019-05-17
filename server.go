@@ -120,13 +120,12 @@ func executeCmd(cmd string) (e error) {
 	}
 	defer resp.Body.Close()
 
-	bodybytes, err := ioutil.ReadAll(resp.Body)
+	_, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error sending request")
 		fmt.Println(err)
 		return err
 	}
-	fmt.Println(string(bodybytes))
 	return nil
 }
 
@@ -271,11 +270,10 @@ func remove(name string) (e error) {
 		fmt.Println(err)
 		return err
 	}
-	affect, err := res.RowsAffected()
+	_, err = res.RowsAffected()
 	if err != nil {
 		fmt.Println(err)
 		return err
 	}
-	fmt.Println(affect, "rows changed")
 	return nil
 }
