@@ -7,7 +7,6 @@ import (
 	"database/sql"
 	"encoding/base64"
 	"fmt"
-	vault "github.com/akkeris/vault-client"
 	"github.com/go-martini/martini"
 	_ "github.com/lib/pq"
 	"github.com/martini-contrib/binding"
@@ -41,12 +40,11 @@ func main() {
 }
 
 func initSecrets() {
-	secret := vault.GetSecret(os.Getenv("INFLUX_SECRET"))
-	brokerdburl = vault.GetFieldFromVaultSecret(secret, "brokerdburl")
-	influx_url = vault.GetFieldFromVaultSecret(secret, "url")
-	influx_username = vault.GetFieldFromVaultSecret(secret, "username")
-	influx_password = vault.GetFieldFromVaultSecret(secret, "password")
-	key = []byte(vault.GetFieldFromVaultSecret(secret, "encryptkey"))
+        brokerdburl = os.Getenv("DATABASE_URL")
+	influx_url = os.Getenv("INFLUX_URL")
+	influx_username = os.Getenv("DATABASE_USERNAME")
+	influx_password = os.Getenv("DATABASE_PASSWORD")
+	key = []byte(os.Getenv("DATABASE_KEY"))
 }
 func returnmessage(r render.Render, code int, message string) {
 	r.JSON(code, map[string]string{"message": message})
